@@ -1,36 +1,195 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Article Web Application
 
-## Getting Started
+A web application for creating, managing, and viewing articles.
 
-First, run the development server:
+The application provides a dashboard for managing article statuses and a public-style preview for published articles.
+
+## Tech Stack
+
+* Next.js
+* React
+* TypeScript
+* Tailwind CSS
+* Lucide React
+* REST API
+
+## Features
+
+* Article dashboard
+* Published, Draft, and Trashed tabs
+* Create new articles
+* Edit existing articles
+* Move articles to trash
+* Publish or save articles as drafts
+* Article preview
+* Pagination
+* Responsive interface
+* REST API integration
+
+## Project Structure
+
+```text
+frontend/
+├── app/
+│   ├── add-new/
+│   │   └── page.tsx
+│   ├── edit/
+│   │   └── [id]/
+│   │       └── page.tsx
+│   ├── preview/
+│   │   └── page.tsx
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── lib/
+│   └── api.ts
+├── public/
+├── .env.local
+├── package.json
+├── package-lock.json
+├── next.config.ts
+├── postcss.config.mjs
+└── tsconfig.json
+```
+
+## Requirements
+
+Make sure the following are installed:
+
+* Node.js
+* npm
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/KevinAxelN/article-web-application.git
+```
+
+Navigate to the frontend:
+
+```bash
+cd article-web-application/frontend
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+## Environment Variables
+
+Create a `.env.local` file inside the `frontend` directory:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8080
+```
+
+This variable points the frontend to the backend API.
+
+For a deployed environment, replace the value with the deployed backend URL:
+
+```env
+NEXT_PUBLIC_API_URL=https://your-backend-url.com
+```
+
+Do not commit `.env.local` to Git.
+
+## Run Locally
+
+Start the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The frontend requires the backend API to be running.
 
-## Learn More
+## Available Pages
 
-To learn more about Next.js, take a look at the following resources:
+| Page         | Description                  |
+| ------------ | ---------------------------- |
+| `/`          | Article management dashboard |
+| `/add-new`   | Create a new article         |
+| `/edit/{id}` | Edit an existing article     |
+| `/preview`   | Preview published articles   |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Article Management
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Published
 
-## Deploy on Vercel
+Displays articles with `publish` status.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Drafts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Displays articles with `draft` status.
+
+### Trashed
+
+Displays articles with `thrash` status.
+
+Articles can be edited from the dashboard, while active articles can be moved to the trash.
+
+## API Integration
+
+The frontend communicates with the backend through REST API endpoints.
+
+The API base URL is configured using:
+
+```env
+NEXT_PUBLIC_API_URL
+```
+
+Example:
+
+```text
+Frontend
+   │
+   │ REST API
+   ▼
+Backend API
+   │
+   ▼
+MySQL / TiDB
+```
+
+## Build for Production
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+Start the production server:
+
+```bash
+npm start
+```
+
+## Deployment
+
+The frontend can be deployed using Vercel.
+
+Recommended configuration for this monorepo:
+
+```text
+Root Directory: frontend
+Framework: Next.js
+```
+
+Set the following environment variable in the hosting platform:
+
+```env
+NEXT_PUBLIC_API_URL=https://your-backend-url.com
+```
+
+After deployment, the application can communicate with the deployed backend API through this environment variable.
